@@ -1,3 +1,10 @@
 <p>
   board works!
 </p>
+    <div class="flex-container">
+      <div class="flex-item" *ngFor="let item of gameBoard">
+        <img (click)="iconSelected(item)" *ngIf="item.isRevealed" src='{{ item.pattern }}' alt="" />
+        <img (click)="iconSelected(item)" *ngIf="!item.isRevealed" src='{{ cover }}' alt="" />
+      </div>
+
+    </div>
