@@ -1,4 +1,8 @@
 <h1>
   {{title}}
 </h1>
-<app-board></app-board>
+<app-board [gameTiles]="gameTiles" (notify)='onNotify($event)' > </app-board>
+<h3>History</h3>
+<ul>
+  <li *ngFor="let event of history">event: {{event}}</li>
+</ul>

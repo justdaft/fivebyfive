@@ -1,14 +1,50 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output} from '@angular/core';
+import { Subject }    from 'rxjs/Subject';
+
 import { Tile, ITile } from './tile';
 
 declare let GIXI: any;
 
 @Injectable()
 export class GameService {
-  gameBoard: Array<ITile>;
-  constructor() {}
+  // @Output() tileSelected = new EventEmitter();
 
-generateUUID() {
+  // Observable string sources
+  private tileSelectedSource = new Subject<any>();
+  // private firstTileSelectedSource = new Subject<any>();
+  // private secondTileSelectedSource = new Subject<any>();
+
+  // Observable string streams
+  tileSelected$ = this.tileSelectedSource.asObservable();
+  // firstTileSelected$ = this.firstTileSelectedSource.asObservable();
+  // secondTileSelected$ = this.secondTileSelectedSource.asObservable();
+
+  gameBoard: Array<ITile>;
+
+  constructor() { }
+
+  tileSelected(tile: any) {
+    // console.log('tileSelected', tile);
+    this.tileSelectedSource.next(tile);
+  }
+
+  // Service message commands
+  // firstTileSelected(tile: any) {
+  //   console.log('firstTileSelected', tile);
+  //   this.firstTileSelectedSource.next(tile);
+  // }
+
+  // secondTileSelected(tile: any) {
+  //   console.log('secondTileSelected', tile);
+  //   this.secondTileSelectedSource.next(tile);
+  // }
+
+  // selectTile(event: any) {
+  //   // console.log('GameService, selectTile:', event);
+  //   this.tileSelected.emit(event);
+  // }
+
+  generateUUID() {
     let d = new Date().getTime();
     let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       let r = (d + Math.random() * 16) % 16 | 0;
@@ -18,7 +54,7 @@ generateUUID() {
     return uuid;
   };
 
- newGameBoard():  Array<ITile> {
+  newGameBoard(): Array<ITile> {
     this.gameBoard = [];
     for (let x = 0; x < 12; x++) {
       let imgData = new GIXI(50).getImage();
@@ -50,6 +86,6 @@ generateUUID() {
 
     console.log(this.gameBoard);
     return this.gameBoard;
- }
+  }
 
 }

@@ -2,9 +2,9 @@
   board works!
 </p>
     <div class="flex-container">
-      <div class="flex-item" *ngFor="let item of gameBoard">
-        <img (click)="iconSelected(item)" *ngIf="item.isRevealed" src='{{ item.pattern }}' alt="" />
-        <img (click)="iconSelected(item)" *ngIf="!item.isRevealed" src='{{ cover }}' alt="" />
+      <div class="flex-tile" *ngFor="let tile of gameTiles">
+        <img (click)="tileSelected(tile)"  *ngIf="tile.isRevealed" src='{{ tile.pattern }}' alt="" />
+        <img (click)="tileSelected(tile)" *ngIf="!tile.isRevealed" src='{{ cover }}' alt="" />
       </div>
 
     </div>
